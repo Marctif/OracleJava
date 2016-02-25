@@ -1,0 +1,21 @@
+a) There have been 3 total commits done by me (2 were done along with the instructions and then I had 
+to do another to fix a file, forgot to save changes in book.txt before committing and pushing it) there are
+a total of 11 commits done to the repository according to github
+
+b) Aug 20th 2015 last changed, feb 17, 2016 it was last moved
+
+c) README.txt.txt
+HardWoodSeller.java
+WoodItem.java
+
+d) HardWoodSeller.java was modified 1 time (created )
+WoodItem.java was modified 2 times (created, varriable names changed)
+
+e) git log is the history of all commit in that directroy, git status is the of the branch and which files
+need to be commited
+
+f) git log main.java
+
+g) git log --grep="transaction"
+
+h) git log --author=Lauren --after="2016-2-16" --before="2016-1-5"
