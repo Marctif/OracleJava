@@ -1,4 +1,4 @@
-package controller;
+//package controller;
 
 import java.io.File;
 import java.util.Scanner;
@@ -28,6 +28,9 @@ public class HardwoodSeller {
 	private double whiteOakTime = 2.3;
 	private double sawDustTime = 1;
 	
+	private String []info;
+	private String []woodInfo;
+	private ArrayList<WoodItem> items;
 	/**
 	 * @param args
 	 */
@@ -42,9 +45,10 @@ public class HardwoodSeller {
 		{
 			File f = new File(inputFilePath);
 			Scanner scan = new Scanner(f);
-			String []info = scan.nextLine().split(";");
-			String []woodInfo = scan.nextLine().split(";");
-			ArrayList<WoodItem> items = new ArrayList<WoodItem>();
+			info = scan.nextLine().split(";");
+			woodInfo = scan.nextLine().split(";");
+			items = new ArrayList<WoodItem>();
+			
 			for(String s : woodInfo)
 			{
 				WoodItem w;
@@ -65,6 +69,8 @@ public class HardwoodSeller {
 				items.add(w);
 			}
 			
+			
+			
 		}
 		catch(Exception ex)
 		{
@@ -73,7 +79,32 @@ public class HardwoodSeller {
 	}
 	
 	public Double deliveryTime(){
+		
 		Double deliveryETA = 0.0;
+		for(int x = 0; x < items.size(); x++)
+		{
+			WoodItem w = items.get(x);
+			String s = woodInfo[x];
+			String[] args = s.split(":");
+			double order = Double.parseDouble(args[1]);
+			double currentETA = 0;
+			if(order <= 100)
+				currentETA = w.baseDeliveryTime;
+			else if(order <= 200)
+				currentETA = 2 * w.baseDeliveryTime;
+			else if(order <= 300)
+				currentETA = 3 * w.baseDeliveryTime;
+			else if(order <= 400)
+				currentETA = 4 * w.baseDeliveryTime;
+			else if(order <= 500)
+				currentETA = 5 * w.baseDeliveryTime;
+			else 
+				currentETA = 5.5 * w.baseDeliveryTime;
+			
+			if(currentETA > deliveryETA)
+				deliveryETA = currentETA;
+				
+		}
 		return deliveryETA;
 	}
 	
