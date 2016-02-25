@@ -1,4 +1,4 @@
-//package controller;
+package controller;
 
 import java.io.File;
 import java.util.Scanner;
@@ -28,15 +28,37 @@ public class HardwoodSeller {
 	private double whiteOakTime = 2.3;
 	private double sawDustTime = 1;
 	
-	private String []info;
-	private String []woodInfo;
-	private ArrayList<WoodItem> items;
+	private static String []info;
+	private static String []woodInfo;
+	private static ArrayList<WoodItem> items;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		System.out.print("Enter the file name: ");
+		Scanner scan = new Scanner(System.in);
+		HardwoodSeller h = new HardwoodSeller();
+		h.readInputFile(scan.next());
+		System.out.println();
+		System.out.print("Buyer name: " + info[0] + "\n");
+		System.out.print("Address: " + info[1] + "\n");
+		System.out.print("Date: " + info[2] + "\n");
+		double total = 0;
+		for(int x = 0; x < items.size(); x++)
+		{
+			WoodItem w = items.get(x);
+			String name = w.getType();
+			String wInfo = woodInfo[x];
+			String []arg = wInfo.split(":");
+			double num = Double.parseDouble(arg[1]);
+			double price = w.getPrice();
+			System.out.println(name + ": " + num + ": " + price);
+			total += num * price;
+		}
+		double eta = h.deliveryTime();
+		System.out.println("Deliver time: " + eta);
+		System.out.println("Total Price: " + total);
 	}
 	
 	public void readInputFile(String inputFilePath)
